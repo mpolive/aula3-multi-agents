@@ -1,63 +1,69 @@
-# 📧 Multi-Agent Email Writer com LangChain
+# 📧 Multi-Agent Email Writer
 
 ## 📌 Visão Geral
 
-Este projeto demonstra a implementação de um **sistema multi-agente para escrita e avaliação de e-mails** utilizando **LangChain**.  
-A solução simula um fluxo de trabalho real, onde diferentes agentes de IA assumem papéis especializados, em vez de um único modelo gerar a resposta final.
+Este projeto demonstra a implementação de um **sistema multi-agente para escrita e avaliação de e-mails** utilizando a **OpenAI API**.  
+A solução simula um fluxo de trabalho real, onde diferentes agentes de IA assumem papéis especializados, processando o contexto sequencialmente para gerar e-mails corporativos de alta qualidade.
 
 O pipeline é composto por três agentes:
 
-1. **Agente de Reflexão** – Analisa o problema e cria um plano estruturado
-2. **Agente de Escrita** – Redige o e-mail com base no plano
-3. **Agente de Avaliação** – Avalia, revisa e melhora o e-mail
+1. **Agente de Reflexão** – Analisa o contexto e cria um plano estruturado
+2. **Agente de Escrita** – Redige o e-mail com base no plano de reflexão
+3. **Agente de Avaliação** – Avalia, critica e fornece recomendações de melhoria
 
 ---
 
 ## 🎯 Objetivo do Projeto
 
-- Demonstrar o uso de **arquitetura multi-agente** com LangChain
+- Demonstrar o uso de **arquitetura multi-agente** com OpenAI API
 - Melhorar qualidade, clareza e tom de e-mails corporativos
-- Separar claramente as etapas de **planejamento, execução e revisão**
-- Servir como base educacional para estudos de LLMs em pipelines
+- Separar claramente as etapas de **reflexão, escrita e avaliação**
+- Servir como base educacional para estudos de LLMs em pipelines multi-agente
 
 ---
 
 ## 🧠 Arquitetura do Sistema
 
 ```text
-Entrada do Usuário
+Contexto do Usuário
         ↓
 Agente de Reflexão (Planejamento)
-        ↓
+        ↓ output → input
 Agente de Escrita (Redação)
+        ↓ output → input
+Agente de Avaliação (Crítica e Recomendações)
         ↓
-Agente de Avaliação (Crítica e Revisão)
-        ↓
-E-mail Final Revisado
+E-mail com Feedback Final
 ```
 
-Cada agente é implementado como uma `LLMChain` independente.
+Cada agente é uma função independente que utiliza a OpenAI API (GPT-4 mini) para processar o contexto e gerar uma resposta estruturada.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
 - **Python 3.10+**
-- **LangChain**
-- **OpenAI API (Chat Models)**
+- **OpenAI API (GPT-4 mini)**
+- **python-dotenv** (para gerenciamento de variáveis de ambiente)
 
 ---
 
 ## 📦 Instalação
 
+### Pré-requisitos
+- Python 3.10 ou superior
+- Uma chave API válida do OpenAI (https://platform.openai.com/api-keys)
+
+### Passos
+
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/multi-agent-email-langchain.git
-cd multi-agent-email-langchain
+git clone https://github.com/seu-usuario/multi-agent-email-writer.git
+cd multi-agent-email-writer
 ```
 
-2. Crie um ambiente virtual (opcional, recomendado):
+2. Crie um ambiente virtual (recomendado):
 
 ```bash
 python -m venv .venv
@@ -68,85 +74,158 @@ source .venv/bin/activate  # Linux / Mac
 3. Instale as dependências:
 
 ```bash
-pip install langchain openai
+pip install -r requirements.txt
 ```
 
-4. Configure sua chave da OpenAI:
+4. Configure sua chave da OpenAI criando um arquivo `.env` na raiz do projeto:
 
 ```bash
-export OPENAI_API_KEY="sua-chave"   # Linux / Mac
-setx OPENAI_API_KEY "sua-chave"     # Windows
+# .env
+OPENAI_API_KEY="sua-chave-aqui"
+OPENAI_ORG_ID="sua-org-id-opcional"
+OPENAI_PROJECT_ID="seu-project-id-opcional"
+```
+
+Ou defina via variável de ambiente:
+
+```bash
+# Linux / Mac
+export OPENAI_API_KEY="sua-chave"
+
+# Windows (PowerShell)
+$env:OPENAI_API_KEY="sua-chave"
+
+# Windows (CMD)
+setx OPENAI_API_KEY "sua-chave"
 ```
 
 ---
 
 ## ▶️ Como Executar
 
-Execute o script principal:
+Execute o script principal do projeto:
 
 ```bash
 python main.py
 ```
 
-Você pode alterar a entrada do usuário diretamente no código para testar diferentes tipos de e-mails.
+### Fluxo de Execução
+
+1. **Agente de Reflexão** recebe o contexto do cliente e gera um plano estruturado
+2. **Agente de Escrita** lê o plano e redige o e-mail corporativo
+3. **Agente de Avaliação** analisa o e-mail gerado e fornece feedback
+
+### Exemplo de Saída no Terminal
+
+```
+[Saída do Agente de Reflexão - Plano Estruturado]
+...
+
+[Saída do Agente de Escrita - E-mail Redigido]
+...
+
+[Saída do Agente de Avaliação - Feedback e Recomendações]
+...
+```
+
+### Personalizando o Contexto
+
+Para modificar o contexto do e-mail, edite o arquivo:
+- [multi_agent_email/writting_agent/main.py](multi_agent_email/writting_agent/main.py)
+
+Procure pela variável `customer_email` e altere o texto conforme necessário.
 
 ---
 
-## 🧪 Exemplo de Entrada
+## 🧪 Exemplo de Entrada e Saída
 
-```text
-Escreva um e-mail para um cliente informando atraso na entrega de um projeto.
+### Entrada (Contexto)
+```
+Crie um email para um cliente corporativo apresentando nossa solução
+de visão computacional para inspeção industrial. O estilo deve ser
+formal e técnico, com tom confiante e persuasivo. Inclua um CTA para
+agendar uma demonstração.
 ```
 
-## 📤 Exemplo de Saída
+### Fluxo de Processamento
 
-```text
-Prezada(o) [Nome],
+**1. Reflexão (Planejamento):**
+```
+- Estrutura do e-mail definida
+- Pontos principais: apresentação, diferenciais, CTA
+- Tom: confiante e profissional
+```
 
-Espero que esteja bem.
+**2. Escrita (Redação):**
+```
+Prezado Sr. Silva,
 
-Identificamos a necessidade de realizar ajustes técnicos adicionais no projeto,
-o que impactará o prazo inicialmente previsto.
+Gostaria de apresentar nossa solução avançada de visão computacional...
+[e-mail completo com CTA]
+```
 
-A nova data estimada de entrega é [nova data].
-Estamos atuando de forma prioritária para garantir a qualidade acordada.
-
-Agradecemos pela compreensão e seguimos à disposição.
-
-Atenciosamente,
-[Seu nome]
+**3. Avaliação (Feedback):**
+```
+✓ Clareza: 9/10
+✓ Profissionalismo: 9/10
+✓ CTA presente e clara
+Recomendações: Adicionar estatísticas de ROI
 ```
 
 ---
 
 ## 🔄 Benefícios da Abordagem Multi-Agente
 
-- Planejamento explícito antes da escrita
-- Melhor adequação de tom e linguagem
-- Revisão crítica automática
-- Código modular e extensível
-- Pipeline reutilizável
+- ✅ Planejamento explícito antes da escrita (menos erros)
+- ✅ Melhor adequação de tom e linguagem
+- ✅ Revisão crítica automática e feedback estruturado
+- ✅ Código modular e extensível
+- ✅ Pipeline reutilizável para diferentes contextos
+- ✅ Separação clara de responsabilidades
 
 ---
 
 ## 🚀 Possíveis Evoluções
 
 - Loop automático de melhoria (avaliador → escritor)
-- Pontuação de qualidade do e-mail
-- Memória por cliente ou contexto
-- Integração com CrewAI
-- Uso de ferramentas (políticas internas, CRM, etc.)
+- Pontuação de qualidade de e-mail com métricas
+- Memória por cliente ou contexto persistente
+- Interface web para facilitar uso
+- Integração com bancos de dados CRM
+- Uso de ferramentas (políticas internas, documentos, etc.)
+- Suporte para múltiplos idiomas
 
 ---
 
 ## 📚 Referências
 
-- LangChain Documentation: https://python.langchain.com
-- OpenAI API Documentation
+- OpenAI API Documentation: https://platform.openai.com/docs
+- OpenAI Models: https://platform.openai.com/docs/models
+- Python dotenv: https://github.com/theskumar/python-dotenv
 
 ---
 
 ## 👩‍💻 Autor
 
-Projeto desenvolvido para fins educacionais, demonstrando conceitos de **IA Generativa**, **LangChain** e **arquiteturas multi-agente**.
+Projeto desenvolvido para fins educacionais, demonstrando conceitos de **IA Generativa**, **arquiteturas multi-agente** e uso direto da **OpenAI API** para processamento sequencial de tarefas especializadas.
+
+---
+
+## 📋 Estrutura do Projeto
+
+```
+multi-agent-email/
+├── main.py                          # Ponto de entrada principal
+├── requirements.txt                 # Dependências do projeto
+├── readme.md                        # Este arquivo
+└── multi_agent_email/
+    ├── main.py                      # Orquestrador dos agentes
+    ├── openai_agent.py              # Cliente OpenAI compartilhado
+    ├── reflection_agent/
+    │   └── main.py                  # Agente de Reflexão
+    ├── writting_agent/
+    │   └── main.py                  # Agente de Escrita
+    └── appraisal_agent/
+        └── main.py                  # Agente de Avaliação
+```
 
