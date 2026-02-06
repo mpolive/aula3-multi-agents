@@ -7,9 +7,9 @@
 
 ---
 
-## 🇧🇷 Português
+# 🇧🇷 Português
 
-### 🎯 Objetivo
+## 🎯 Objetivo
 
 Este projeto implementa um **sistema multi-agente utilizando LangGraph** para geração de e-mails profissionais.
 O fluxo simula um processo real de trabalho, no qual diferentes agentes especializados colaboram para:
@@ -27,7 +27,7 @@ A interface permite escolher o **tom do e-mail**:
 
 ---
 
-### 🧠 Arquitetura
+## 🧠 Arquitetura
 
 **Agentes**
 
@@ -43,81 +43,146 @@ Reflexão → Escrita → Avaliação ↺ (se necessário)
 
 ---
 
-### 🧪 Exemplo Real de Uso
+## 🧩 Como cada agente foi configurado (Prompts)
 
-**Entrada do Usuário**
+### 1. Agente de Reflexão
+
+* Identifica objetivo e público
+* Define nível de formalidade
+* Lista pontos obrigatórios
+* Considera o tom selecionado
+
+### 2. Agente de Escrita
+
+* Converte o plano em texto coeso
+* Respeita regras do tom:
+
+  * Formal → linguagem corporativa
+  * Amigável → comunicação empática
+  * Técnico → precisão e objetividade
+
+### 3. Agente de Avaliação
+
+* Revisa clareza e aderência
+* Decide aprovação
+* Solicita reescrita quando necessário
+
+Formato obrigatório:
+
+```
+APROVADO: sim ou nao
+JUSTIFICATIVA:
+VERSAO_SUGERIDA:
+```
+
+---
+
+## 🧪 Exemplo Real de Uso
+
+**Entrada**
 
 > “Escrever email para cliente explicando atraso na entrega por mudança de escopo e propondo nova data.”
 
 **Tom:** Formal
 
-#### 📌 Saída Final Revisada
+**Saída (resumida)**
 
-**Assunto:** Atualização sobre o cronograma do projeto
+> Prezado(a),
+> Identificamos ajustes no escopo necessários para garantir a qualidade técnica.
+> Propomos como nova data 25/06 e seguimos à disposição para alinhamentos.
+> Atenciosamente.
 
-Prezado(a),
+**Avaliação**
 
-Gostaria de atualizá-lo(a) sobre o andamento do projeto. Durante a execução identificamos ajustes no escopo previamente definido, necessários para garantir a qualidade técnica da entrega.
-
-Em razão dessas adequações, propomos como nova data o dia 25/06. Permanecemos à disposição para alinhar prioridades e minimizar impactos no planejamento.
-
-Atenciosamente,
-Equipe do Projeto
-
-#### 📌 Avaliação do Agente
-
-* Tom adequado ao contexto corporativo
-* Clareza na justificativa
-* Inclusão de proposta objetiva de solução
-* Linguagem profissional e respeitosa
+* Tom adequado
+* Justificativa clara
+* Proposta objetiva
 
 ---
 
-### 🛠 Tecnologias
+## 🚀 Instruções de Execução
 
-* Python
-* LangChain
-* LangGraph
-* Streamlit
-* OpenAI API
+### 1. Clonar o repositório
 
----
+```bash
+git clone https://github.com/mpolive/aula3-multi-agents.git
+cd aula3-multi-agents
+```
 
-### 🚀 Execução
+### 2. Criar e ativar ambiente virtual
+
+**Windows**
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
+```
+
+**Linux/Mac**
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Instalar dependências
+
+```bash
 pip install -r requirements.txt
+```
+
+### 4. Configurar chave
+
+Criar arquivo **.env**
+
+```
+OPENAI_API_KEY=sua_chave_aqui
+```
+
+### 5. Executar
+
+```bash
 streamlit run app.py
+```
+
+👉 [http://localhost:8501](http://localhost:8501)
+
+---
+
+## 📁 Estrutura
+
+```
+aula3-multi-agents/
+├── app.py
+├── email_graph.py
+├── requirements.txt
+├── .env
+└── README.md
 ```
 
 ---
 
-### 📊 Resultados
+## 📊 Resultados
 
-* Melhor estrutura argumentativa
-* Controle explícito de estilo
-* Processo iterativo transparente
+* Melhor estrutura textual
+* Controle de estilo
+* Processo iterativo
 * Qualidade superior ao prompt único
 
 ---
 
----
+# 🇺🇸 English Version
 
-## 🇺🇸 English Version
+## 🎯 Objective
 
-### 🎯 Objective
+This project implements a **LangGraph multi-agent system** for professional email generation, simulating a real teamwork process:
 
-This project implements a **multi-agent system using LangGraph** for generating professional emails.
-The workflow simulates a real working process in which specialized agents collaborate to:
+1. Reflect and plan
+2. Write
+3. Evaluate
+4. Iterate until approved
 
-1. **Reflect and plan** the content
-2. **Write** the email
-3. **Evaluate and review** the result
-4. Iterate until adequate quality is achieved
-
-The interface allows the user to choose the **tone of the email**:
+Available tones:
 
 * Formal
 * Friendly
@@ -125,85 +190,68 @@ The interface allows the user to choose the **tone of the email**:
 
 ---
 
-### 🧠 Architecture
+## 🧠 Architecture
 
-**Agents**
+Agents:
 
-1. **Reflection Agent** – context analysis and planning
-2. **Writing Agent** – text generation
-3. **Evaluation Agent** – review and decision about rewriting
+1. Reflection
+2. Writing
+3. Evaluation
 
-**LangGraph Flow**
+Flow:
 
 ```
-Reflection → Writing → Evaluation ↺ (if needed)
+Reflection → Writing → Evaluation ↺
 ```
 
 ---
 
-### 🧪 Real Example
+## 🧩 Agent Prompt Design
 
-**User Input**
+* **Reflection:** analyzes intent and audience
+* **Writing:** generates according to tone
+* **Evaluation:** quality gate with structured output
 
-> “Write an email to a client explaining a delay due to scope change and proposing a new deadline.”
+---
+
+## 🧪 Real Example
+
+**Input**
+
+> “Write an email to a client explaining delay due to scope change and propose new deadline.”
 
 **Tone:** Formal
 
-#### 📌 Final Output
+**Output**
 
-**Subject:** Update on Project Schedule
-
-Dear,
-
-I would like to update you on the progress of the project. During development, adjustments to the originally defined scope were identified as necessary to ensure the technical quality of the delivery.
-
-Due to these changes, we propose June 25th as the new deadline. We remain available to align priorities and reduce any impact on the overall planning.
-
-Sincerely,
-Project Team
-
-#### 📌 Agent Evaluation
-
-* Appropriate corporate tone
-* Clear justification
-* Objective proposal
-* Professional language
+> Dear,
+> Adjustments in scope were required to ensure quality.
+> We propose June 25th as new deadline.
+> Sincerely.
 
 ---
 
-### 🛠 Technologies
-
-* Python
-* LangChain
-* LangGraph
-* Streamlit
-* OpenAI API
-
----
-
-### 🚀 How to Run
+## 🚀 How to Run
 
 ```bash
 python -m venv venv
-venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
 ---
 
-### 📊 Outcomes
+## 📊 Outcomes
 
 * Better argumentative structure
 * Explicit tone control
-* Transparent iterative process
-* Higher quality than single-prompt approach
+* Transparent iterations
 
 ---
 
 ## 👥 Authors
 
-Academic project developed for the study of Multi-Agent Systems with Large Language Models.
+Academic project on Multi-Agent LLM systems.
 
 ## 📄 License
 
