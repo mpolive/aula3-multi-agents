@@ -42,7 +42,7 @@ Cada agente é implementado como uma `LLMChain` independente.
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Python 3.10+**
+- **Python 3.14+**
 - **LangChain**
 - **OpenAI API (Chat Models)**
 
@@ -149,4 +149,3 @@ Atenciosamente,
 ## 👩‍💻 Autor
 
 Projeto desenvolvido para fins educacionais, demonstrando conceitos de **IA Generativa**, **LangChain** e **arquiteturas multi-agente**.
-
