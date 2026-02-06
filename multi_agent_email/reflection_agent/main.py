@@ -52,12 +52,5 @@ prompt = f"""{prompt_task}
 {prompt_references}
 """
 
-customer_email = """
-Crie um email para um cliente corporativo apresentando nossa solução
-de visão computacional para inspeção industrial. O estilo deve ser
-formal e técnico, com tom confiante e persuasivo. Inclua um CTA para
-agendar uma demonstração.
-"""
-
-def reflection_main():
+def reflection_main() -> str:
     return prompt

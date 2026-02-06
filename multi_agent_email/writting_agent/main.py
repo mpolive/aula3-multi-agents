@@ -1,48 +1,23 @@
-import os
-import openai
-from datetime import datetime
+# Import shared OpenAI helper. Support running as script or as package.
+try:
+    from multi_agent_email.openai_agent import get_completion, styles, tones, get_today_str, llm_model
+except Exception:
+    import sys, os
+    pkg_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    if pkg_root not in sys.path:
+        sys.path.insert(0, pkg_root)
+    from openai_agent import get_completion, styles, tones, get_today_str, llm_model
 
-from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv()) # read local .env file
-openai.api_key = os.environ['OPENAI_API_KEY']
-
-llm_model = "gpt-4o-mini"
-
-client = openai.OpenAI()
-
-styles = ["formal and technical", "casual and friendly", "enthusiastic and persuasive", "concise and to the point", "storytelling and engaging"]
-tones = ["confident", "empathetic", "urgent", "optimistic", "serious"]
-
-customer_email = """
+customer_email = """\
 Crie um email para um cliente corporativo apresentando nossa solução
 de visão computacional para inspeção industrial. O estilo deve ser
 formal e técnico, com tom confiante e persuasivo. Inclua um CTA para
 agendar uma demonstração.
 """
 
-def get_completion(prompt, model=llm_model):
-    messages = [
-        {
-        "role": "user",
-        "content": prompt
-        }
-    ]
-
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=0,
+def writting_main(reflection: str) -> str:
+    prompt_formatted = reflection.format(
+        customer_email=customer_email, style=styles[0], tone=tones[0], date=get_today_str()
     )
-
-    return response.choices[0].message.content
-
-def get_today_str() -> str:
-    """Get current date in a human-readable format."""
-    dt = datetime.now()
-    return f"{dt.strftime('%a %b')} {dt.day}, {dt.year}"
-
-
-def writting_main(reflection: str):
-    prompt_formatted = reflection.format(customer_email=customer_email, style=styles[0], tone=tones[0], date=get_today_str())
-    print(get_completion(prompt_formatted))
-    return prompt_formatted
+    result = get_completion(prompt_formatted)
+    return result

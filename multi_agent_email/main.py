@@ -5,8 +5,11 @@ from .appraisal_agent.main import appraisal_agent
 
 def main():
     reflection = reflection_main()
+    print(reflection)
     email = writting_main(reflection)
-    print(appraisal_agent(email))
+    print(email)
+    appraisal = appraisal_agent(email)
+    print(appraisal)
 
 if __name__ == "__main__":
     main()

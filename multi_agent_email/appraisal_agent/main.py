@@ -1,32 +1,11 @@
-import os
-import openai
-
-from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv()) # read local .env file
-openai.api_key = os.environ['OPENAI_API_KEY']
-
-llm_model = "gpt-4o-mini"
-
-client = openai.OpenAI()
-
-styles = ["formal and technical", "casual and friendly", "enthusiastic and persuasive", "concise and to the point", "storytelling and engaging"]
-tones = ["confident", "empathetic", "urgent", "optimistic", "serious"]
-
-def get_completion(prompt, model=llm_model):
-    messages = [
-        {
-        "role": "user",
-        "content": prompt
-        }
-    ]
-
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=0,
-    )
-
-    return response.choices[0].message.content
+try:
+    from multi_agent_email.openai_agent import get_completion, styles, tones, get_today_str, llm_model
+except Exception:
+    import sys, os
+    pkg_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    if pkg_root not in sys.path:
+        sys.path.insert(0, pkg_root)
+    from openai_agent import get_completion, styles, tones, get_today_str, llm_model
 
 
 def appraisal_agent(email: str) -> str:
