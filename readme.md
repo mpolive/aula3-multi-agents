@@ -1,6 +1,6 @@
 # 📧 Multi-Agent Email Writer
 
-## 📌 Visão Geral
+## Sistema Multi-Agente para Escrita e Avaliação de E-mails
 
 Este projeto demonstra a implementação de um **sistema multi-agente para escrita e avaliação de e-mails** utilizando a **OpenAI API**.  
 A solução simula um fluxo de trabalho real, onde diferentes agentes de IA assumem papéis especializados, processando o contexto sequencialmente para gerar e-mails corporativos de alta qualidade.
@@ -13,7 +13,7 @@ O pipeline é composto por três agentes:
 
 ---
 
-## 🎯 Objetivo do Projeto
+## 🇧🇷 Português
 
 - Demonstrar o uso de **arquitetura multi-agente** com OpenAI API
 - Melhorar qualidade, clareza e tom de e-mails corporativos
@@ -22,7 +22,15 @@ O pipeline é composto por três agentes:
 
 ---
 
-## 🧠 Arquitetura do Sistema
+### 🧠 Arquitetura
+
+**Agentes**
+
+1. **Reflexão** – análise do contexto e planejamento
+2. **Escrita** – geração do texto
+3. **Avaliação** – revisão e decisão de reescrita
+
+**Fluxo LangGraph**
 
 ```text
 Contexto do Usuário
@@ -101,13 +109,11 @@ setx OPENAI_API_KEY "sua-chave"
 
 ---
 
-## ▶️ Como Executar
+### 🧪 Exemplo Real de Uso
 
 Execute o script principal do projeto:
 
-```bash
-python main.py
-```
+> “Escrever email para cliente explicando atraso na entrega por mudança de escopo e propondo nova data.”
 
 ### Fluxo de Execução
 
@@ -135,7 +141,7 @@ Para modificar o contexto do e-mail, edite o arquivo:
 
 Procure pela variável `customer_email` e altere o texto conforme necessário.
 
----
+#### 📌 Saída Final Revisada
 
 ## 🧪 Exemplo de Entrada e Saída
 
@@ -174,7 +180,7 @@ Recomendações: Adicionar estatísticas de ROI
 
 ---
 
-## 🔄 Benefícios da Abordagem Multi-Agente
+### 📊 Resultados
 
 - ✅ Planejamento explícito antes da escrita (menos erros)
 - ✅ Melhor adequação de tom e linguagem
@@ -185,7 +191,7 @@ Recomendações: Adicionar estatísticas de ROI
 
 ---
 
-## 🚀 Possíveis Evoluções
+---
 
 - Loop automático de melhoria (avaliador → escritor)
 - Pontuação de qualidade de e-mail com métricas
@@ -197,7 +203,7 @@ Recomendações: Adicionar estatísticas de ROI
 
 ---
 
-## 📚 Referências
+### 🧠 Architecture
 
 - OpenAI API Documentation: https://platform.openai.com/docs
 - OpenAI Models: https://platform.openai.com/docs/models
@@ -205,7 +211,7 @@ Recomendações: Adicionar estatísticas de ROI
 
 ---
 
-## 👩‍💻 Autor
+### 🧪 Real Example
 
 Projeto desenvolvido para fins educacionais, demonstrando conceitos de **IA Generativa**, **arquiteturas multi-agente** e uso direto da **OpenAI API** para processamento sequencial de tarefas especializadas.
 
@@ -229,3 +235,66 @@ multi-agent-email/
         └── main.py                  # Agente de Avaliação
 ```
 
+> “Write an email to a client explaining a delay due to scope change and proposing a new deadline.”
+
+**Tone:** Formal
+
+#### 📌 Final Output
+
+**Subject:** Update on Project Schedule
+
+Dear,
+
+I would like to update you on the progress of the project. During development, adjustments to the originally defined scope were identified as necessary to ensure the technical quality of the delivery.
+
+Due to these changes, we propose June 25th as the new deadline. We remain available to align priorities and reduce any impact on the overall planning.
+
+Sincerely,
+Project Team
+
+#### 📌 Agent Evaluation
+
+* Appropriate corporate tone
+* Clear justification
+* Objective proposal
+* Professional language
+
+---
+
+### 🛠 Technologies
+
+* Python
+* LangChain
+* LangGraph
+* Streamlit
+* OpenAI API
+
+---
+
+### 🚀 How to Run
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+### 📊 Outcomes
+
+* Better argumentative structure
+* Explicit tone control
+* Transparent iterative process
+* Higher quality than single-prompt approach
+
+---
+
+## 👥 Authors
+
+Academic project developed for the study of Multi-Agent Systems with Large Language Models.
+
+## 📄 License
+
+Educational use.
