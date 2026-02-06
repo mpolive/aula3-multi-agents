@@ -13,7 +13,7 @@ O pipeline é composto por três agentes:
 
 ---
 
-## 🇧🇷 Português
+# 🇧🇷 Português
 
 - Demonstrar o uso de **arquitetura multi-agente** com OpenAI API
 - Melhorar qualidade, clareza e tom de e-mails corporativos
@@ -22,7 +22,7 @@ O pipeline é composto por três agentes:
 
 ---
 
-### 🧠 Arquitetura
+## 🧠 Arquitetura
 
 **Agentes**
 
@@ -109,7 +109,7 @@ setx OPENAI_API_KEY "sua-chave"
 
 ---
 
-### 🧪 Exemplo Real de Uso
+## 🧩 Como cada agente foi configurado (Prompts)
 
 Execute o script principal do projeto:
 
@@ -141,7 +141,7 @@ Para modificar o contexto do e-mail, edite o arquivo:
 
 Procure pela variável `customer_email` e altere o texto conforme necessário.
 
-#### 📌 Saída Final Revisada
+**Saída (resumida)**
 
 ## 🧪 Exemplo de Entrada e Saída
 
@@ -178,9 +178,24 @@ Gostaria de apresentar nossa solução avançada de visão computacional...
 Recomendações: Adicionar estatísticas de ROI
 ```
 
+👉 [http://localhost:8501](http://localhost:8501)
+
 ---
 
-### 📊 Resultados
+## 📁 Estrutura
+
+```
+aula3-multi-agents/
+├── app.py
+├── email_graph.py
+├── requirements.txt
+├── .env
+└── README.md
+```
+
+---
+
+## 📊 Resultados
 
 - ✅ Planejamento explícito antes da escrita (menos erros)
 - ✅ Melhor adequação de tom e linguagem
@@ -191,7 +206,7 @@ Recomendações: Adicionar estatísticas de ROI
 
 ---
 
----
+# 🇺🇸 English Version
 
 - Loop automático de melhoria (avaliador → escritor)
 - Pontuação de qualidade de e-mail com métricas
@@ -203,7 +218,7 @@ Recomendações: Adicionar estatísticas de ROI
 
 ---
 
-### 🧠 Architecture
+## 🧠 Architecture
 
 - OpenAI API Documentation: https://platform.openai.com/docs
 - OpenAI Models: https://platform.openai.com/docs/models
@@ -211,7 +226,7 @@ Recomendações: Adicionar estatísticas de ROI
 
 ---
 
-### 🧪 Real Example
+## 🧩 Agent Prompt Design
 
 Projeto desenvolvido para fins educacionais, demonstrando conceitos de **IA Generativa**, **arquiteturas multi-agente** e uso direto da **OpenAI API** para processamento sequencial de tarefas especializadas.
 
@@ -235,65 +250,46 @@ multi-agent-email/
         └── main.py                  # Agente de Avaliação
 ```
 
-> “Write an email to a client explaining a delay due to scope change and proposing a new deadline.”
+---
+
+## 🧪 Real Example
+
+**Input**
+
+> “Write an email to a client explaining delay due to scope change and propose new deadline.”
 
 **Tone:** Formal
 
-#### 📌 Final Output
+**Output**
 
-**Subject:** Update on Project Schedule
-
-Dear,
-
-I would like to update you on the progress of the project. During development, adjustments to the originally defined scope were identified as necessary to ensure the technical quality of the delivery.
-
-Due to these changes, we propose June 25th as the new deadline. We remain available to align priorities and reduce any impact on the overall planning.
-
-Sincerely,
-Project Team
-
-#### 📌 Agent Evaluation
-
-* Appropriate corporate tone
-* Clear justification
-* Objective proposal
-* Professional language
+> Dear,
+> Adjustments in scope were required to ensure quality.
+> We propose June 25th as new deadline.
+> Sincerely.
 
 ---
 
-### 🛠 Technologies
-
-* Python
-* LangChain
-* LangGraph
-* Streamlit
-* OpenAI API
-
----
-
-### 🚀 How to Run
+## 🚀 How to Run
 
 ```bash
 python -m venv venv
-venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
 ---
 
-### 📊 Outcomes
+## 📊 Outcomes
 
 * Better argumentative structure
 * Explicit tone control
-* Transparent iterative process
-* Higher quality than single-prompt approach
+* Transparent iterations
 
 ---
 
 ## 👥 Authors
 
-Academic project developed for the study of Multi-Agent Systems with Large Language Models.
+Academic project on Multi-Agent LLM systems.
 
 ## 📄 License
 
