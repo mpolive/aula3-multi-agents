@@ -1,151 +1,210 @@
-# 📧 Multi-Agent Email Writer com LangChain
+# 📧 Multi-Agent System for Writing and Evaluating Emails
 
-## 📌 Visão Geral
+## Sistema Multi-Agente para Escrita e Avaliação de E-mails
 
-Este projeto demonstra a implementação de um **sistema multi-agente para escrita e avaliação de e-mails** utilizando **LangChain**.  
-A solução simula um fluxo de trabalho real, onde diferentes agentes de IA assumem papéis especializados, em vez de um único modelo gerar a resposta final.
-
-O pipeline é composto por três agentes:
-
-1. **Agente de Reflexão** – Analisa o problema e cria um plano estruturado
-2. **Agente de Escrita** – Redige o e-mail com base no plano
-3. **Agente de Avaliação** – Avalia, revisa e melhora o e-mail
+🇧🇷 *Versão em Português*
+🇺🇸 *English Version Below*
 
 ---
 
-## 🎯 Objetivo do Projeto
+## 🇧🇷 Português
 
-- Demonstrar o uso de **arquitetura multi-agente** com LangChain
-- Melhorar qualidade, clareza e tom de e-mails corporativos
-- Separar claramente as etapas de **planejamento, execução e revisão**
-- Servir como base educacional para estudos de LLMs em pipelines
+### 🎯 Objetivo
 
----
+Este projeto implementa um **sistema multi-agente utilizando LangGraph** para geração de e-mails profissionais.
+O fluxo simula um processo real de trabalho, no qual diferentes agentes especializados colaboram para:
 
-## 🧠 Arquitetura do Sistema
+1. **Refletir e planejar** o conteúdo
+2. **Escrever** o e-mail
+3. **Avaliar e revisar** o resultado
+4. Iterar até atingir qualidade adequada
 
-```text
-Entrada do Usuário
-        ↓
-Agente de Reflexão (Planejamento)
-        ↓
-Agente de Escrita (Redação)
-        ↓
-Agente de Avaliação (Crítica e Revisão)
-        ↓
-E-mail Final Revisado
-```
+A interface permite escolher o **tom do e-mail**:
 
-Cada agente é implementado como uma `LLMChain` independente.
+* Formal
+* Amigável
+* Técnico
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+### 🧠 Arquitetura
 
-- **Python 3.14+**
-- **LangChain**
-- **OpenAI API (Chat Models)**
+**Agentes**
 
----
+1. **Reflexão** – análise do contexto e planejamento
+2. **Escrita** – geração do texto
+3. **Avaliação** – revisão e decisão de reescrita
 
-## 📦 Instalação
+**Fluxo LangGraph**
 
-1. Clone o repositório:
-
-```bash
-git clone https://github.com/seu-usuario/multi-agent-email-langchain.git
-cd multi-agent-email-langchain
 ```
-
-2. Crie um ambiente virtual (opcional, recomendado):
-
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Linux / Mac
-.venv\Scripts\activate     # Windows
-```
-
-3. Instale as dependências:
-
-```bash
-pip install langchain openai
-```
-
-4. Configure sua chave da OpenAI:
-
-```bash
-export OPENAI_API_KEY="sua-chave"   # Linux / Mac
-setx OPENAI_API_KEY "sua-chave"     # Windows
+Reflexão → Escrita → Avaliação ↺ (se necessário)
 ```
 
 ---
 
-## ▶️ Como Executar
+### 🧪 Exemplo Real de Uso
 
-Execute o script principal:
+**Entrada do Usuário**
 
-```bash
-python main.py
-```
+> “Escrever email para cliente explicando atraso na entrega por mudança de escopo e propondo nova data.”
 
-Você pode alterar a entrada do usuário diretamente no código para testar diferentes tipos de e-mails.
+**Tom:** Formal
 
----
+#### 📌 Saída Final Revisada
 
-## 🧪 Exemplo de Entrada
+**Assunto:** Atualização sobre o cronograma do projeto
 
-```text
-Escreva um e-mail para um cliente informando atraso na entrega de um projeto.
-```
+Prezado(a),
 
-## 📤 Exemplo de Saída
+Gostaria de atualizá-lo(a) sobre o andamento do projeto. Durante a execução identificamos ajustes no escopo previamente definido, necessários para garantir a qualidade técnica da entrega.
 
-```text
-Prezada(o) [Nome],
-
-Espero que esteja bem.
-
-Identificamos a necessidade de realizar ajustes técnicos adicionais no projeto,
-o que impactará o prazo inicialmente previsto.
-
-A nova data estimada de entrega é [nova data].
-Estamos atuando de forma prioritária para garantir a qualidade acordada.
-
-Agradecemos pela compreensão e seguimos à disposição.
+Em razão dessas adequações, propomos como nova data o dia 25/06. Permanecemos à disposição para alinhar prioridades e minimizar impactos no planejamento.
 
 Atenciosamente,
-[Seu nome]
+Equipe do Projeto
+
+#### 📌 Avaliação do Agente
+
+* Tom adequado ao contexto corporativo
+* Clareza na justificativa
+* Inclusão de proposta objetiva de solução
+* Linguagem profissional e respeitosa
+
+---
+
+### 🛠 Tecnologias
+
+* Python
+* LangChain
+* LangGraph
+* Streamlit
+* OpenAI API
+
+---
+
+### 🚀 Execução
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
 ---
 
-## 🔄 Benefícios da Abordagem Multi-Agente
+### 📊 Resultados
 
-- Planejamento explícito antes da escrita
-- Melhor adequação de tom e linguagem
-- Revisão crítica automática
-- Código modular e extensível
-- Pipeline reutilizável
-
----
-
-## 🚀 Possíveis Evoluções
-
-- Loop automático de melhoria (avaliador → escritor)
-- Pontuação de qualidade do e-mail
-- Memória por cliente ou contexto
-- Integração com CrewAI
-- Uso de ferramentas (políticas internas, CRM, etc.)
+* Melhor estrutura argumentativa
+* Controle explícito de estilo
+* Processo iterativo transparente
+* Qualidade superior ao prompt único
 
 ---
 
-## 📚 Referências
+---
 
-- LangChain Documentation: https://python.langchain.com
-- OpenAI API Documentation
+## 🇺🇸 English Version
+
+### 🎯 Objective
+
+This project implements a **multi-agent system using LangGraph** for generating professional emails.
+The workflow simulates a real working process in which specialized agents collaborate to:
+
+1. **Reflect and plan** the content
+2. **Write** the email
+3. **Evaluate and review** the result
+4. Iterate until adequate quality is achieved
+
+The interface allows the user to choose the **tone of the email**:
+
+* Formal
+* Friendly
+* Technical
 
 ---
 
-## 👩‍💻 Autor
+### 🧠 Architecture
 
-Projeto desenvolvido para fins educacionais, demonstrando conceitos de **IA Generativa**, **LangChain** e **arquiteturas multi-agente**.
+**Agents**
+
+1. **Reflection Agent** – context analysis and planning
+2. **Writing Agent** – text generation
+3. **Evaluation Agent** – review and decision about rewriting
+
+**LangGraph Flow**
+
+```
+Reflection → Writing → Evaluation ↺ (if needed)
+```
+
+---
+
+### 🧪 Real Example
+
+**User Input**
+
+> “Write an email to a client explaining a delay due to scope change and proposing a new deadline.”
+
+**Tone:** Formal
+
+#### 📌 Final Output
+
+**Subject:** Update on Project Schedule
+
+Dear,
+
+I would like to update you on the progress of the project. During development, adjustments to the originally defined scope were identified as necessary to ensure the technical quality of the delivery.
+
+Due to these changes, we propose June 25th as the new deadline. We remain available to align priorities and reduce any impact on the overall planning.
+
+Sincerely,
+Project Team
+
+#### 📌 Agent Evaluation
+
+* Appropriate corporate tone
+* Clear justification
+* Objective proposal
+* Professional language
+
+---
+
+### 🛠 Technologies
+
+* Python
+* LangChain
+* LangGraph
+* Streamlit
+* OpenAI API
+
+---
+
+### 🚀 How to Run
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+### 📊 Outcomes
+
+* Better argumentative structure
+* Explicit tone control
+* Transparent iterative process
+* Higher quality than single-prompt approach
+
+---
+
+## 👥 Authors
+
+Academic project developed for the study of Multi-Agent Systems with Large Language Models.
+
+## 📄 License
+
+Educational use.
