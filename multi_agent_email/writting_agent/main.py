@@ -24,7 +24,7 @@ def fetch_crypto_prices(coins: list[str]):
     
     #Substituir pela chamada da API real, por exemplo CoinGecko ou CoinMarketCap
     mock_data = {
-        "bitcoin": {"usd": 70423.25},
+        "bitcoin": {"usd": 70423.30},
         "ethereum": {"usd": 3850.45}
     }
     return {coin.lower(): mock_data.get(coin.lower(), "N/A") for coin in coins}
