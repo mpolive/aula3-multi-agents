@@ -139,7 +139,7 @@ Execute o script principal do projeto:
 Para modificar o contexto do e-mail, edite o arquivo:
 - [multi_agent_email/writting_agent/main.py](multi_agent_email/writting_agent/main.py)
 
-Procure pela variável `customer_email` e altere o texto conforme necessário.
+Procure pela variável `customer_input` e altere o texto conforme necessário.
 
 **Saída (resumida)**
 

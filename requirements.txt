@@ -1,2 +1,6 @@
+# Core do projeto
 openai
 python-dotenv
+
+langchain
+langchain-openai
